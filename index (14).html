@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bytestorm PC Specs — Free Windows Hardware Info Tool</title>
+
+  <!-- ── Favicon (same as Bytestorm Corporation) ── -->
+  <link rel="icon" type="image/png" href="https://i.imgur.com/NLz6Jfd.png"/>
+  <link rel="apple-touch-icon" href="https://i.imgur.com/NLz6Jfd.png"/>
+
+  <!-- ── SEO ── -->
+  <meta name="description" content="Bytestorm PC Specs is a free Windows app that instantly displays your full hardware configuration — CPU, GPU, RAM, storage, motherboard, and more. Download the installer now."/>
+  <meta name="keywords" content="PC specs, hardware info, system information, CPU info, GPU info, RAM info, Windows hardware tool, free PC tool, Bytestorm, Bytestorm PC Specs"/>
+  <meta name="author" content="Bytestorm Corporation"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://bytestorm-pc-specs.vercel.app/"/>
+
+  <!-- ── Open Graph (Facebook, Discord, etc.) ── -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Bytestorm PC Specs — Free Windows Hardware Info Tool"/>
+  <meta property="og:image" content="https://i.imgur.com/NLz6Jfd.png"/>
+  <meta property="og:description" content="Instantly scan and display your full PC hardware — CPU, GPU, RAM, storage, and more. Free download for Windows 10/11."/>
+  <meta property="og:url" content="https://bytestorm-pc-specs.vercel.app/"/>
+  <meta property="og:site_name" content="Bytestorm Corporation"/>
+
+  <!-- ── Twitter Card ── -->
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="Bytestorm PC Specs — Free Windows Hardware Info Tool"/>
+  <meta name="twitter:description" content="Instantly scan and display your full PC hardware — CPU, GPU, RAM, storage, and more. Free download for Windows 10/11."/>
+
+  <!-- ── Structured Data (Google rich results) ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Bytestorm PC Specs",
+    "operatingSystem": "Windows 10, Windows 11",
+    "applicationCategory": "UtilitiesApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "A free Windows application that instantly displays your full hardware configuration including CPU, GPU, RAM, storage, motherboard, OS, network, and display information.",
+    "author": {
+      "@type": "Organization",
+      "name": "Bytestorm Corporation",
+      "url": "https://bytestormcorp.vercel.app"
+    },
+    "downloadUrl": "https://bytestorm-pc-specs.vercel.app/Bytestorm-PC-Specs-Setup.exe"
+  }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    a { color: #fff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Sticky nav (scroll state) ── */
+    .sticky-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      height: 0;
+      overflow: hidden;
+      background: rgba(0,0,0,0.92);
+      border-bottom: 1px solid #1a1a1a;
+      backdrop-filter: blur(6px);
+      transition: height 0.25s ease;
+    }
+    .sticky-nav.visible { height: 44px; }
+    .sticky-nav .nav-logo {
+      font-size: 0.8rem;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      color: #fff;
+      text-shadow: 0 0 8px #fff, 0 0 18px rgba(255,255,255,0.5);
+    }
+    .sticky-nav .nav-dl {
+      font-size: 0.72rem;
+      font-weight: bold;
+      color: #000;
+      background: #fff;
+      padding: 5px 14px;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+    }
+    .sticky-nav .nav-dl:hover { background: #ddd; }
+
+    /* ── Main header ── */
+    header {
+      text-align: center;
+      padding: 50px 20px 24px;
+    }
+
+    .logo-text {
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
+      font-weight: 900;
+      letter-spacing: 0.22em;
+      color: #fff;
+      text-shadow:
+        0 0 8px #fff,
+        0 0 20px #fff,
+        0 0 40px rgba(255,255,255,0.5),
+        0 0 80px rgba(255,255,255,0.25);
+      margin-bottom: 6px;
+    }
+
+    /* ── Main content ── */
+    main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 20px 20px 60px;
+    }
+
+    .sec-title {
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: #fff;
+      border-bottom: 1px solid #222;
+      padding-bottom: 8px;
+      margin-bottom: 22px;
+      letter-spacing: 0.05em;
+    }
+
+    section { margin-bottom: 52px; }
+
+    .tagline {
+      font-size: 1.05rem;
+      color: #ccc;
+      margin-bottom: 18px;
+      max-width: 560px;
+    }
+    .tagline strong { color: #fff; }
+
+    /* ── Download button ── */
+    .dl-btn {
+      display: inline-block;
+      background: #fff;
+      color: #000;
+      font-weight: bold;
+      font-size: 0.9rem;
+      padding: 13px 34px;
+      letter-spacing: 0.08em;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s;
+      margin-bottom: 10px;
+    }
+    .dl-btn:hover { background: #ddd; text-decoration: none; }
+
+    .dl-note {
+      font-size: 0.75rem;
+      color: #555;
+      margin-top: 6px;
+    }
+
+    /* ── Feature list ── */
+    .feat-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px 32px;
+    }
+
+    .feat-list li {
+      font-size: 0.85rem;
+      color: #ccc;
+      padding-left: 16px;
+      position: relative;
+    }
+    .feat-list li::before { content: '—'; position: absolute; left: 0; color: #555; }
+    .feat-list li strong { color: #fff; }
+
+    /* ── Requirements table ── */
+    .req-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.83rem;
+    }
+    .req-table th, .req-table td {
+      text-align: left;
+      padding: 9px 12px;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .req-table th {
+      color: #888;
+      font-weight: normal;
+      letter-spacing: 0.1em;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+    .req-table td { color: #ccc; }
+    .req-table td:first-child { color: #666; width: 140px; }
+
+    /* ── Install steps ── */
+    .steps { list-style: none; counter-reset: steps; }
+    .steps li {
+      counter-increment: steps;
+      padding: 10px 0 10px 38px;
+      border-bottom: 1px solid #111;
+      font-size: 0.85rem;
+      color: #ccc;
+      position: relative;
+    }
+    .steps li:last-child { border-bottom: none; }
+    .steps li::before {
+      content: counter(steps, decimal-leading-zero) '.';
+      position: absolute;
+      left: 0;
+      color: #444;
+      font-size: 0.78rem;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid #1a1a1a;
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 0.75rem;
+      color: #444;
+      letter-spacing: 0.1em;
+    }
+    footer span { color: #666; }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky nav shown on scroll -->
+  <div class="sticky-nav" id="stickyNav">
+    <span class="nav-logo">BYTESTORM PC SPECS</span>
+    <a class="nav-dl" href="Bytestorm-PC-Specs-Setup.exe" download>⬇ DOWNLOAD</a>
+  </div>
+
+  <header>
+    <div class="logo-text">BYTESTORM PC SPECS</div>
+  </header>
+
+  <main>
+
+    <section>
+      <div class="sec-title">| 01. Download |</div>
+      <p class="tagline">
+        <strong>Bytestorm PC Specs</strong> — instantly scan and display your full hardware configuration. CPU, GPU, RAM, storage, and more. Free. No bloat.
+      </p>
+      <a class="dl-btn" href="Bytestorm-PC-Specs-Setup.exe" download>⬇ DOWNLOAD FOR WINDOWS</a>
+      <div class="dl-note">Bytestorm-PC-Specs-Setup.exe · Windows 10 / 11 · Free</div>
+    </section>
+
+    <section>
+      <div class="sec-title">| 02. What It Shows |</div>
+      <ul class="feat-list">
+        <li><strong>CPU</strong> — name, cores, threads, clock speed</li>
+        <li><strong>GPU</strong> — model, VRAM, driver version</li>
+        <li><strong>RAM</strong> — total, available, speed</li>
+        <li><strong>Storage</strong> — all drives, capacity, free space</li>
+        <li><strong>Motherboard</strong> — manufacturer, model, BIOS</li>
+        <li><strong>OS</strong> — Windows version and build</li>
+        <li><strong>Network</strong> — adapter name and status</li>
+        <li><strong>Display</strong> — resolution and refresh rate</li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="sec-title">| 03. System Requirements |</div>
+      <table class="req-table">
+        <thead>
+          <tr><th>Component</th><th>Minimum</th><th>Recommended</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>OS</td><td>Windows 10 (64-bit)</td><td>Windows 11 (64-bit)</td></tr>
+          <tr><td>RAM</td><td>512 MB</td><td>2 GB+</td></tr>
+          <tr><td>Storage</td><td>50 MB free</td><td>100 MB free</td></tr>
+          <tr><td>Permissions</td><td>Standard user</td><td>Administrator</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <div class="sec-title">| 04. How to Install |</div>
+      <ol class="steps">
+        <li>Download <strong>Bytestorm-PC-Specs-Setup.exe</strong> using the button above.</li>
+        <li>Run the installer. If Windows SmartScreen appears, click <em>More info → Run anyway</em>.</li>
+        <li>Follow the on-screen setup steps and choose your install folder.</li>
+        <li>Launch <strong>Bytestorm PC Specs</strong> from your desktop or Start menu.</li>
+        <li>Your full hardware breakdown will appear instantly.</li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 Bytestorm Corporation. Bytestorm PC Specs.<br/>
+    Realtime Output Dual System Architecture.<br/>
+    Made by Bytestorm
+  </footer>
+
+  <script>
+    const nav = document.getElementById('stickyNav');
+    const header = document.querySelector('header');
+    const observer = new IntersectionObserver(
+      ([entry]) => nav.classList.toggle('visible', !entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(header);
+  </script>
+
+</body>
+</html>
