@@ -16,7 +16,7 @@
   <meta name="robots" content="index, follow"/>
   <link rel="canonical" href="https://bytestorm-pc-specs.vercel.app/"/>
 
-  <!-- ── Open Graph (Facebook, Discord, etc.) ── -->
+  <!-- ── Open Graph ── -->
   <meta property="og:type" content="website"/>
   <meta property="og:title" content="Bytestorm PC Specs — Free Windows Hardware Info Tool"/>
   <meta property="og:image" content="https://i.imgur.com/NLz6Jfd.png"/>
@@ -29,28 +29,29 @@
   <meta name="twitter:title" content="Bytestorm PC Specs — Free Windows Hardware Info Tool"/>
   <meta name="twitter:description" content="Instantly scan and display your full PC hardware — CPU, GPU, RAM, storage, and more. Free download for Windows 10/11."/>
 
-  <!-- ── Structured Data (Google rich results) ── -->
+  <!-- ── Structured Data ── -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Bytestorm PC Specs",
-    "operatingSystem": "Windows 10, Windows 11",
+    "operatingSystem": "Windows 10, Windows 11, macOS",
     "applicationCategory": "UtilitiesApplication",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
     },
-    "description": "A free Windows application that instantly displays your full hardware configuration including CPU, GPU, RAM, storage, motherboard, OS, network, and display information.",
+    "description": "A free application that instantly displays your full hardware configuration including CPU, GPU, RAM, storage, motherboard, OS, network, and display information.",
     "author": {
       "@type": "Organization",
       "name": "Bytestorm Corporation",
       "url": "https://bytestormcorp.vercel.app"
     },
-    "downloadUrl": "https://bytestorm-pc-specs.vercel.app/bytestorm_pc_specs.exe"
+    "downloadUrl": "https://github.com/epicactsuperplayer/Bytestorm-PC-Specs/releases/download/v1.0/Bytestorm-PC-Specs-Setup.exe"
   }
   </script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -65,7 +66,7 @@
     a { color: #fff; text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* ── Sticky nav (scroll state) ── */
+    /* ── Sticky nav ── */
     .sticky-nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -97,8 +98,11 @@
       padding: 5px 14px;
       letter-spacing: 0.08em;
       text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
     }
-    .sticky-nav .nav-dl:hover { background: #ddd; }
+    .sticky-nav .nav-dl:hover { background: #ddd; text-decoration: none; }
 
     /* ── Main header ── */
     header {
@@ -148,7 +152,9 @@
 
     /* ── Download button ── */
     .dl-btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       background: #fff;
       color: #000;
       font-weight: bold;
@@ -162,12 +168,75 @@
       margin-bottom: 10px;
     }
     .dl-btn:hover { background: #ddd; text-decoration: none; }
+    .dl-btn svg { flex-shrink: 0; }
 
     .dl-note {
       font-size: 0.75rem;
       color: #555;
       margin-top: 6px;
     }
+
+    /* ── OS label above button ── */
+    .os-label {
+      font-size: 0.7rem;
+      color: #444;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    /* ── Divider between download buttons ── */
+    .os-divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 28px 0;
+      max-width: 460px;
+    }
+    .os-divider::before,
+    .os-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #1e1e1e;
+    }
+    .os-divider span {
+      font-size: 0.68rem;
+      color: #444;
+      letter-spacing: 0.15em;
+      white-space: nowrap;
+    }
+
+    /* ── OS tabs ── */
+    .os-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 28px;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .os-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      color: #555;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.15s, border-color 0.15s;
+      user-select: none;
+    }
+    .os-tab.active {
+      color: #fff;
+      border-bottom-color: #fff;
+    }
+    .os-tab:hover:not(.active) { color: #999; }
+
+    .os-panel { display: none; }
+    .os-panel.active { display: block; }
 
     /* ── Feature list ── */
     .feat-list {
@@ -176,7 +245,6 @@
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 14px 32px;
     }
-
     .feat-list li {
       font-size: 0.85rem;
       color: #ccc;
@@ -237,6 +305,7 @@
     }
     footer span { color: #666; }
   </style>
+
   <!-- Cookie Management -->
   <script type="text/javascript" data-cmp-ab="1" src="https://cdn.consentmanager.net/delivery/autoblocking/509cf33812608.js" data-cmp-host="d.delivery.consentmanager.net" data-cmp-cdn="cdn.consentmanager.net" data-cmp-codesrc="16"></script>
 
@@ -251,10 +320,28 @@
 </head>
 <body>
 
-  <!-- Sticky nav shown on scroll -->
+  <!-- Sticky nav -->
   <div class="sticky-nav" id="stickyNav">
     <span class="nav-logo">BYTESTORM PC SPECS</span>
-    <a class="nav-dl" href="https://github.com/epicactsuperplayer/Bytestorm-PC-Specs/releases/download/v1.0/Bytestorm-PC-Specs-Setup.exe" download>⬇ DOWNLOAD</a>
+    <div style="display:inline-flex;gap:8px;">
+      <a class="nav-dl" href="https://github.com/epicactsuperplayer/Bytestorm-PC-Specs/releases/download/v1.0/Bytestorm-PC-Specs-Setup.exe" download>
+        <!-- Windows 11 logo: four rounded rectangles in a 2x2 grid -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 88 88" fill="#666">
+          <rect x="0"  y="0"  width="40" height="40" rx="4"/>
+          <rect x="48" y="0"  width="40" height="40" rx="4"/>
+          <rect x="0"  y="48" width="40" height="40" rx="4"/>
+          <rect x="48" y="48" width="40" height="40" rx="4"/>
+        </svg>
+        ⬇ WINDOWS
+      </a>
+      <a class="nav-dl" href="https://github.com/epicactsuperplayer/Bytestorm-PC-Specs/releases/download/v1.0/Bytestorm-PC-Specs.pkg" download>
+        <!-- Apple logo -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="13" viewBox="0 0 256 315" fill="#666">
+          <path d="M213.803 167.03c.442 47.58 41.74 63.413 42.197 63.615-.35 1.116-6.599 22.563-21.757 44.716-13.104 19.153-26.705 38.235-48.13 38.63-21.05.388-27.82-12.483-51.888-12.483-24.061 0-31.582 12.088-51.51 12.87-20.68.783-36.428-20.522-49.64-39.615C5.077 235.195-14.932 166.99 12.166 120.39c13.482-23.118 37.597-37.766 63.784-38.151 19.913-.38 38.69 13.397 50.854 13.397 12.157 0 34.984-16.57 58.948-14.137 10.033.423 38.177 4.057 56.248 30.552l-1.197.739Zm-67.199-121.21c10.985-13.351 18.394-31.883 16.395-50.473-15.868.636-35.064 10.565-46.418 23.916-10.197 11.783-19.131 30.68-16.74 48.762 17.691 1.372 35.79-9.004 46.763-22.205Z"/>
+        </svg>
+        ⬇ MACOS
+      </a>
+    </div>
   </div>
 
   <header>
@@ -263,54 +350,147 @@
 
   <main>
 
+    <!-- ── 01. Download ── -->
     <section>
       <div class="sec-title">| 01. Download |</div>
       <p class="tagline">
         <strong>Bytestorm PC Specs</strong> — instantly scan and display your full hardware configuration. CPU, GPU, RAM, storage, and more. Free. No bloat.
       </p>
-      <a class="dl-btn" href="https://github.com/epicactsuperplayer/Bytestorm-PC-Specs/releases/download/v1.0/Bytestorm-PC-Specs-Setup.exe" download>⬇ DOWNLOAD FOR WINDOWS</a>
+
+      <div class="os-label">WINDOWS</div>
+      <a class="dl-btn" href="https://github.com/epicactsuperplayer/Bytestorm-PC-Specs/releases/download/v1.0/Bytestorm-PC-Specs-Setup.exe" download>
+        <!-- Windows 11 logo: four rounded squares -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 88 88" fill="#666">
+          <rect x="0"  y="0"  width="40" height="40" rx="4"/>
+          <rect x="48" y="0"  width="40" height="40" rx="4"/>
+          <rect x="0"  y="48" width="40" height="40" rx="4"/>
+          <rect x="48" y="48" width="40" height="40" rx="4"/>
+        </svg>
+        ⬇ DOWNLOAD FOR WINDOWS
+      </a>
       <div class="dl-note">Bytestorm-PC-Specs-Setup.exe · Windows 10 / 11 · Free</div>
+
+      <div class="os-divider"><span>ALSO AVAILABLE ON</span></div>
+
+      <div class="os-label">MACOS</div>
+      <a class="dl-btn" href="https://github.com/epicactsuperplayer/Bytestorm-PC-Specs/releases/download/v1.0/Bytestorm-PC-Specs.pkg" download>
+        <!-- Apple logo -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 256 315" fill="#666">
+          <path d="M213.803 167.03c.442 47.58 41.74 63.413 42.197 63.615-.35 1.116-6.599 22.563-21.757 44.716-13.104 19.153-26.705 38.235-48.13 38.63-21.05.388-27.82-12.483-51.888-12.483-24.061 0-31.582 12.088-51.51 12.87-20.68.783-36.428-20.522-49.64-39.615C5.077 235.195-14.932 166.99 12.166 120.39c13.482-23.118 37.597-37.766 63.784-38.151 19.913-.38 38.69 13.397 50.854 13.397 12.157 0 34.984-16.57 58.948-14.137 10.033.423 38.177 4.057 56.248 30.552l-1.197.739Zm-67.199-121.21c10.985-13.351 18.394-31.883 16.395-50.473-15.868.636-35.064 10.565-46.418 23.916-10.197 11.783-19.131 30.68-16.74 48.762 17.691 1.372 35.79-9.004 46.763-22.205Z"/>
+        </svg>
+        ⬇ DOWNLOAD FOR MACOS
+      </a>
+      <div class="dl-note">Bytestorm-PC-Specs.pkg · macOS 10 Catalina+ · Free</div>
     </section>
 
+    <!-- ── 02. What It Shows ── -->
     <section>
       <div class="sec-title">| 02. What It Shows |</div>
-      <ul class="feat-list">
-        <li><strong>CPU</strong> — name, cores, threads, clock speed</li>
-        <li><strong>GPU</strong> — model, VRAM, driver version</li>
-        <li><strong>RAM</strong> — total, available, speed</li>
-        <li><strong>Storage</strong> — all drives, capacity, free space</li>
-        <li><strong>Motherboard</strong> — manufacturer, model, BIOS</li>
-        <li><strong>OS</strong> — Windows version and build</li>
-        <li><strong>Network</strong> — adapter name and status</li>
-        <li><strong>Display</strong> — resolution and refresh rate</li>
-      </ul>
+      <div class="os-tabs">
+        <div class="os-tab active" onclick="switchTab(this, 'feat-win')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 88 88" fill="currentColor"><rect x="0" y="0" width="40" height="40" rx="4"/><rect x="48" y="0" width="40" height="40" rx="4"/><rect x="0" y="48" width="40" height="40" rx="4"/><rect x="48" y="48" width="40" height="40" rx="4"/></svg>
+          WINDOWS
+        </div>
+        <div class="os-tab" onclick="switchTab(this, 'feat-mac')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 256 315" fill="currentColor"><path d="M213.803 167.03c.442 47.58 41.74 63.413 42.197 63.615-.35 1.116-6.599 22.563-21.757 44.716-13.104 19.153-26.705 38.235-48.13 38.63-21.05.388-27.82-12.483-51.888-12.483-24.061 0-31.582 12.088-51.51 12.87-20.68.783-36.428-20.522-49.64-39.615C5.077 235.195-14.932 166.99 12.166 120.39c13.482-23.118 37.597-37.766 63.784-38.151 19.913-.38 38.69 13.397 50.854 13.397 12.157 0 34.984-16.57 58.948-14.137 10.033.423 38.177 4.057 56.248 30.552l-1.197.739Zm-67.199-121.21c10.985-13.351 18.394-31.883 16.395-50.473-15.868.636-35.064 10.565-46.418 23.916-10.197 11.783-19.131 30.68-16.74 48.762 17.691 1.372 35.79-9.004 46.763-22.205Z"/></svg>
+          MACOS
+        </div>
+      </div>
+      <div id="feat-win" class="os-panel active">
+        <ul class="feat-list">
+          <li><strong>CPU</strong> — name, cores, threads, clock speed</li>
+          <li><strong>GPU</strong> — model, VRAM, driver version</li>
+          <li><strong>RAM</strong> — total, available, speed</li>
+          <li><strong>Storage</strong> — all drives, capacity, free space</li>
+          <li><strong>Motherboard</strong> — manufacturer, model, BIOS</li>
+          <li><strong>OS</strong> — Windows version and build</li>
+          <li><strong>Network</strong> — adapter name and status</li>
+          <li><strong>Display</strong> — resolution and refresh rate</li>
+        </ul>
+      </div>
+      <div id="feat-mac" class="os-panel">
+        <ul class="feat-list">
+          <li><strong>CPU / Chip</strong> — name, cores, performance &amp; efficiency cores</li>
+          <li><strong>GPU</strong> — integrated or discrete model, core count</li>
+          <li><strong>RAM</strong> — total unified memory, available</li>
+          <li><strong>Storage</strong> — all volumes, capacity, free space</li>
+          <li><strong>Mac Model</strong> — identifier, year, serial number</li>
+          <li><strong>macOS</strong> — version, build, kernel release</li>
+          <li><strong>Network</strong> — Wi-Fi and Ethernet adapter info</li>
+          <li><strong>Display</strong> — resolution, refresh rate, color profile</li>
+        </ul>
+      </div>
     </section>
 
+    <!-- ── 03. System Requirements ── -->
     <section>
       <div class="sec-title">| 03. System Requirements |</div>
-      <table class="req-table">
-        <thead>
-          <tr><th>Component</th><th>Minimum</th><th>Recommended</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>OS</td><td>Windows 10 (64-bit)</td><td>Windows 11 (64-bit)</td></tr>
-          <tr><td>RAM</td><td>512 MB</td><td>2 GB+</td></tr>
-          <tr><td>Storage</td><td>50 MB free</td><td>100 MB free</td></tr>
-          <tr><td>Permissions</td><td>Standard user</td><td>Administrator</td></tr>
-        </tbody>
-      </table>
+      <div class="os-tabs">
+        <div class="os-tab active" onclick="switchTab(this, 'req-win')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 88 88" fill="currentColor"><rect x="0" y="0" width="40" height="40" rx="4"/><rect x="48" y="0" width="40" height="40" rx="4"/><rect x="0" y="48" width="40" height="40" rx="4"/><rect x="48" y="48" width="40" height="40" rx="4"/></svg>
+          WINDOWS
+        </div>
+        <div class="os-tab" onclick="switchTab(this, 'req-mac')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 256 315" fill="currentColor"><path d="M213.803 167.03c.442 47.58 41.74 63.413 42.197 63.615-.35 1.116-6.599 22.563-21.757 44.716-13.104 19.153-26.705 38.235-48.13 38.63-21.05.388-27.82-12.483-51.888-12.483-24.061 0-31.582 12.088-51.51 12.87-20.68.783-36.428-20.522-49.64-39.615C5.077 235.195-14.932 166.99 12.166 120.39c13.482-23.118 37.597-37.766 63.784-38.151 19.913-.38 38.69 13.397 50.854 13.397 12.157 0 34.984-16.57 58.948-14.137 10.033.423 38.177 4.057 56.248 30.552l-1.197.739Zm-67.199-121.21c10.985-13.351 18.394-31.883 16.395-50.473-15.868.636-35.064 10.565-46.418 23.916-10.197 11.783-19.131 30.68-16.74 48.762 17.691 1.372 35.79-9.004 46.763-22.205Z"/></svg>
+          MACOS
+        </div>
+      </div>
+      <div id="req-win" class="os-panel active">
+        <table class="req-table">
+          <thead><tr><th>Component</th><th>Minimum</th><th>Recommended</th></tr></thead>
+          <tbody>
+            <tr><td>OS</td><td>Windows 10 (64-bit)</td><td>Windows 11 (64-bit)</td></tr>
+            <tr><td>RAM</td><td>512 MB</td><td>2 GB+</td></tr>
+            <tr><td>Storage</td><td>50 MB free</td><td>100 MB free</td></tr>
+            <tr><td>Permissions</td><td>Standard user</td><td>Administrator</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="req-mac" class="os-panel">
+        <table class="req-table">
+          <thead><tr><th>Component</th><th>Minimum</th><th>Recommended</th><th>Maximum</th></tr></thead>
+          <tbody>
+            <tr><td>OS</td><td>macOS 10 Catalina</td><td>macOS 12 Monterey</td><td>macOS 26 Tahoe</td></tr>
+            <tr><td>Chip</td><td>Intel (64-bit) or Apple Silicon</td><td>Apple M1 or later</td><td>Apple M-series</td></tr>
+            <tr><td>RAM</td><td>512 MB</td><td>2 GB+</td><td>Any</td></tr>
+            <tr><td>Storage</td><td>50 MB free</td><td>100 MB free</td><td>Any</td></tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
+    <!-- ── 04. How to Install ── -->
     <section>
       <div class="sec-title">| 04. How to Install |</div>
-      <ol class="steps">
-        <li>Download <strong>Bytestorm-PC-Specs-Setup.exe</strong> using the button above.</li>
-        <li>Run the installer. If Windows SmartScreen appears, click <em>More info → Run anyway</em>.</li>
-        <li>Follow the on-screen setup steps and choose your install folder.</li>
-        <li>Launch <strong>Bytestorm PC Specs</strong> from your desktop or Start menu.</li>
-        <li>If Windows SmartScreen appears, click <em>More info → Run anyway</em>.</li>
-        <li>Your full hardware breakdown will appear instantly.</li>
-      </ol>
+      <div class="os-tabs">
+        <div class="os-tab active" onclick="switchTab(this, 'inst-win')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 88 88" fill="currentColor"><rect x="0" y="0" width="40" height="40" rx="4"/><rect x="48" y="0" width="40" height="40" rx="4"/><rect x="0" y="48" width="40" height="40" rx="4"/><rect x="48" y="48" width="40" height="40" rx="4"/></svg>
+          WINDOWS
+        </div>
+        <div class="os-tab" onclick="switchTab(this, 'inst-mac')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 256 315" fill="currentColor"><path d="M213.803 167.03c.442 47.58 41.74 63.413 42.197 63.615-.35 1.116-6.599 22.563-21.757 44.716-13.104 19.153-26.705 38.235-48.13 38.63-21.05.388-27.82-12.483-51.888-12.483-24.061 0-31.582 12.088-51.51 12.87-20.68.783-36.428-20.522-49.64-39.615C5.077 235.195-14.932 166.99 12.166 120.39c13.482-23.118 37.597-37.766 63.784-38.151 19.913-.38 38.69 13.397 50.854 13.397 12.157 0 34.984-16.57 58.948-14.137 10.033.423 38.177 4.057 56.248 30.552l-1.197.739Zm-67.199-121.21c10.985-13.351 18.394-31.883 16.395-50.473-15.868.636-35.064 10.565-46.418 23.916-10.197 11.783-19.131 30.68-16.74 48.762 17.691 1.372 35.79-9.004 46.763-22.205Z"/></svg>
+          MACOS
+        </div>
+      </div>
+      <div id="inst-win" class="os-panel active">
+        <ol class="steps">
+          <li>Download <strong>Bytestorm-PC-Specs-Setup.exe</strong> using the button above.</li>
+          <li>Run the installer. If Windows SmartScreen appears, click <em>More info → Run anyway</em>.</li>
+          <li>Follow the on-screen setup steps and choose your install folder.</li>
+          <li>Launch <strong>Bytestorm PC Specs</strong> from your desktop or Start menu.</li>
+          <li>Your full hardware breakdown will appear instantly.</li>
+        </ol>
+      </div>
+      <div id="inst-mac" class="os-panel">
+        <ol class="steps">
+          <li>Download <strong>Bytestorm-PC-Specs.pkg</strong> using the button above.</li>
+          <li>Double-click the <strong>.pkg</strong> file to open the macOS installer.</li>
+          <li>Follow the installation wizard and enter your password if prompted.</li>
+          <li>If macOS Gatekeeper blocks the app, open <em>System Settings → Privacy &amp; Security</em> and click <em>Open Anyway</em>.</li>
+          <li>Launch <strong>Bytestorm PC Specs</strong> from your Applications folder or Launchpad.</li>
+          <li>Your full hardware breakdown will appear instantly.</li>
+        </ol>
+      </div>
     </section>
 
   </main>
@@ -322,13 +502,24 @@
   </footer>
 
   <script>
+    // Sticky nav
     const nav = document.getElementById('stickyNav');
-    const header = document.querySelector('header');
+    const hdr = document.querySelector('header');
     const observer = new IntersectionObserver(
       ([entry]) => nav.classList.toggle('visible', !entry.isIntersecting),
       { threshold: 0 }
     );
-    observer.observe(header);
+    observer.observe(hdr);
+
+    // OS tab switcher — scoped to parent section
+    function switchTab(clickedTab, panelId) {
+      const tabsEl = clickedTab.closest('.os-tabs');
+      tabsEl.querySelectorAll('.os-tab').forEach(t => t.classList.remove('active'));
+      clickedTab.classList.add('active');
+      const section = tabsEl.parentElement;
+      section.querySelectorAll('.os-panel').forEach(p => p.classList.remove('active'));
+      section.querySelector('#' + panelId).classList.add('active');
+    }
   </script>
 
   <!-- Vercel Analytics -->
